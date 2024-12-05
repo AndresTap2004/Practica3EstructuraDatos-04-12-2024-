@@ -1,0 +1,38 @@
+[
+    {
+        "idGenerador": 1,
+        "nombre": "A212",
+        "codigo": "NE122",
+        "costo": 200.0,
+        "consumoPorHora": 100.0,
+        "potencia": 200,
+        "uso": "Deportivo"
+    },
+    {
+        "idGenerador": 2,
+        "nombre": "A354",
+        "codigo": "NE123",
+        "costo": 400.0,
+        "consumoPorHora": 100.0,
+        "potencia": 700,
+        "uso": "Familiar"
+    },
+    {
+        "idGenerador": 3,
+        "nombre": "Referes",
+        "codigo": "NE124",
+        "costo": 1233.0,
+        "consumoPorHora": 1231.0,
+        "potencia": 121,
+        "uso": "Comercial"
+    },
+    {
+        "idGenerador": 4,
+        "nombre": "orax",
+        "codigo": "NE125",
+        "costo": 1000.0,
+        "consumoPorHora": 100.0,
+        "potencia": 100,
+        "uso": "10012312"
+    }
+]

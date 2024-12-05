@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-8 p-6 bg-gray-600 rounded-lg">
+    <h1 class="text-4xl font-extrabold text-white">Editar Familia</h1>
+    <a href="/familias/list" class="inline-flex items-center mt-4 mb-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Volver a la lista
+    </a>
+    <form method="POST" action="/familias/update" class="bg-gray-700 p-6 rounded-lg shadow-lg">
+        <input type="hidden" name="idFamilia" value="{{ family.idFamilia }}">
+        <div class="mb-4">
+            <label class="block mb-2 text-white" for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ family.nombre }}" required class="w-full p-3 bg-gray-600 text-white rounded"/>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

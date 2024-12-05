@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Censo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            background-color: #1f2937; 
+        }
+    </style>
+</head>
+<body class="text-white">
+<header class="bg-gray-800 p-6 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Sistema de Censo</h1>
+        <nav class="mt-4">
+            <ul class="flex space-x-6">
+                <li><a href="#" class="hover:text-gray-400">Inicio</a></li>
+                <li><a href="#" class="hover:text-gray-400">Servicios</a></li>
+                <li><a href="#" class="hover:text-gray-400">Sobre mí</a></li>
+                <li><a href="#" class="hover:text-gray-400">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="flex space-x-4">
+            <a href="/familias/list" class="bg-green-600 px-4 py-2 rounded hover:bg-green-500">FAMILIAS</a>
+            <a href="/generadores/list" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500">GENERADORES</a>
+            <a href="/historial/list" class="bg-red-500 text-white px-4 py-2 rounded-lg">COMPRAS</a>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto p-6">
+    <section class="mb-12 text-center">
+        <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-500">PRACTICA UNIDAD 1 - EED</h2>
+            <p class="mt-2">
+                <span class="text-green-600 font-bold">Autor:</span> Andres F. Tapia M. 
+                <span class="text-green-600 font-bold">Ciclo:</span> Tercero "A"
+            </p>
+        </div>
+    </section>
+
+    <!-- Contenedor Principal -->
+    <div class="container">{% block content %} {% endblock %}</div>
+
+    <section class="mb-12">
+        <h2 class="text-xl font-bold mb-6 text-center">Nuestros Servicios</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
+                <i class="fas fa-laptop-code text-blue-500 text-3xl mb-2"></i>
+                <h3 class="font-semibold">Desarrollo Web</h3>
+                <p class="mt-2">Creamos sitios web responsivos y atractivos.</p>
+            </div>
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
+                <i class="fas fa-paint-brush text-blue-500 text-3xl mb-2"></i>
+                <h3 class="font-semibold">Diseño Gráfico</h3>
+                <p class="mt-2">Diseñamos logos y materiales gráficos impactantes.</p>
+            </div>
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
+                <i class="fas fa-chart-line text-blue-500 text-3xl mb-2"></i>
+                <h3 class="font-semibold">SEO</h3>
+                <p class="mt-2">Optimización para motores de búsqueda para mejorar tu visibilidad.</p>
+            </div>
+            <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
+                <i class="fas fa-comments text-blue-500 text-3xl mb-2"></i>
+                <h3 class="font-semibold">Consultoría</h3>
+                <p class="mt-2">Asesoría especializada para hacer crecer tu negocio.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="text-xl font-bold mb-4 text-center">Contacto</h2>
+        <form class="bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div class="mb-4">
+                <label class="block mb-2" for="nombre">Nombre:</label>
+                <input class="w-full p-3 bg-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2" for="email">Email:</label>
+                <input class="w-full p-3 bg-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" id="email" placeholder="Tu email" required />
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2" for="mensaje">Mensaje:</label>
+                <textarea class="w-full p-3 bg-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500" id="mensaje" rows="4" placeholder="Tu mensaje" required></textarea>
+            </div>
+            <button class="bg-blue-600 p-3 rounded hover:bg-blue-500 transition duration-200" type="submit">Enviar</button>
+        </form>
+    </section>
+</main>
+
+<footer class="bg-gray-800 p-6 text-center">
+    <p>&copy; 2024 Sistema de Censo. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

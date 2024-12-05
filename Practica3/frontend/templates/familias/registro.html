@@ -1,0 +1,14 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-8 p-6 bg-gray-600 rounded-lg">
+    <h1 class="text-4xl font-extrabold text-white">Registro de Familia</h1>
+    <form method="POST" action="/familias/save" class="bg-gray-700 p-6 rounded-lg shadow-lg">
+        <div class="mb-4">
+            <label class="block mb-2 text-white" for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required class="w-full p-3 bg-gray-600 text-white rounded"/>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
+    </form>
+</div>
+{% endblock %}

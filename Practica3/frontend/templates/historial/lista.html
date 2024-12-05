@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-8 p-6 bg-gray-600 rounded-lg shadow-lg">
+    <h1 class="text-4xl font-extrabold text-white">Historial de Transacciones</h1>
+    <div class="flex justify-end mb-3">
+        <a href="/historial/comprar" class="bg-pink-500 text-white px-4 py-2 rounded-lg">Realizar Compra</a>
+    </div>
+    <table class="min-w-full bg-gray-800 rounded-lg shadow-md">
+        <thead class="bg-gray-900 text-white">
+            <tr>
+                <th class="text-center">Nro</th>
+                <th class="text-center">Familia</th>
+                <th class="text-center">Generador</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaccion in transacciones %}
+            <tr>
+                <td class="text-center">{{ transaccion.id }}</td>
+                <td class="text-center">{{ transaccion.nombreFamilia }}</td>
+                <td class="text-center">{{ transaccion.nombreGenerador }}</td>
+                <td class="text-center">
+                    <a href="/historial/transaccion/{{ transaccion.id }}" class="bg-green-600 text-white px-2 py-1 rounded-lg">Visualizar</a>
+                    <!-- Botón para Editar -->
+                    <a href="/historial/actualizar/{{ transaccion.id }}" class="bg-blue-600 text-white px-2 py-1 rounded-lg">Modificar</a>
+                    <!-- Botón para Eliminar -->
+                    <button class="bg-red-600 text-white px-2 py-1 rounded-lg" onclick="deleteRow({{ transaccion.id }})">Eliminar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    
+</script>
+{% endblock %}

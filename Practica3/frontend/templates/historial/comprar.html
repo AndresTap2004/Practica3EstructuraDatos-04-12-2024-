@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Selecciona una Familia y un Generador</h1>
+        <a href="/historial/list" class="inline-flex items-center mt-4 mb-4 px-4 py-2 bg-purple-500 text-white font-semibold rounded hover:bg-purple-600 transition duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Volver a la lista
+        </a>
+        <form action="/comprar_transaccion" method="post" class="bg-gray-700 p-8 rounded-lg shadow-lg">
+            <!-- Selección de Familia -->
+            <div class="mb-4">
+                <label for="familia_id" class="block text-white font-semibold mb-2">Familia:</label>
+                <select name="familia_id" id="familia_id" required class="w-full p-3 bg-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% for familia in familias %}
+                        <option value="{{ familia.idFamilia }}">{{ familia.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Selección de Generador -->
+            <div class="mb-4">
+                <label for="generador_id" class="block text-white font-semibold mb-2">Generador:</label>
+                <select name="generador_id" id="generador_id" required class="w-full p-3 bg-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% for generador in generadores %}
+                        <option value="{{ generador.idGenerador }}">{{ generador.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Botón de Comprar -->
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-600 px-6 py-3 rounded hover:bg-blue-500 transition duration-200 text-white font-semibold">Comprar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

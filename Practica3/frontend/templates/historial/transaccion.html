@@ -1,0 +1,30 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-8 p-6 bg-gradient-to-r from-gray-600 to-gray-700 rounded-lg shadow-lg">
+    <h1 class="text-5xl font-extrabold text-white text-center">Detalles de la Transacción</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md mt-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Detalles de la Transacción</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-700">Información General</h3>
+                <p class="text-gray-600">Familia: <span class="font-bold">{{ transaccion.nombreFamilia }}</span></p>
+            </div>
+            
+            <div class="bg-gray-200 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-700">Detalles del Generador</h3>
+                <p class="text-gray-600">Generador: <span class="font-bold">{{ transaccion.nombreGenerador }}</span></p>
+                <p class="text-gray-600">Costo: <span class="font-bold">${{ transaccion.costo }}</span></p> 
+                <p class="text-gray-600">Consumo por Hora: <span class="font-bold">{{ transaccion.consumoPorHora }} kWh</span></p> 
+                <p class="text-gray-600">Potencia: <span class="font-bold">{{ transaccion.potencia }} W</span></p> 
+                <p class="text-gray-600">Uso: <span class="font-bold">{{ transaccion.uso }}</span></p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-6">
+            <a href="/historial/list" class="bg-purple-500 text-white px-6 py-3 rounded-lg shadow hover:bg-purple-600 transition duration-200">Volver al Historial</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

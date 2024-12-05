@@ -1,0 +1,190 @@
+{% extends 'template.html' %} {% block content %}
+<div class="container mx-auto mt-8 p-6 bg-gray-600 rounded-lg shadow-lg">
+    <h1 class="text-4xl font-extrabold text-white">Listado de Familias</h1>
+
+    <div class="flex flex-wrap items-center gap-6 mb-6">
+        <div class="flex flex-wrap items-center gap-4">
+            <label for="sorting-method" class="form-label text-white"
+                >Ordenar por:</label
+            >
+            <select
+                id="sorting-method"
+                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
+            >
+                <option value="QuickSort">QuickSort</option>
+                <option value="ShellSort">ShellSort</option>
+                <option value="MergeSort">MergeSort</option>
+            </select>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+            <label for="search-attr" class="form-label text-white"
+                >Buscar en:</label
+            >
+            <select
+                id="search-attr"
+                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
+            >
+                <option value="nombre">Nombre</option>
+            </select>
+            <input
+                id="search-field"
+                type="text"
+                placeholder="Buscar..."
+                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
+            />
+            <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg search-button"
+            >
+                Buscar
+            </button>
+            <button
+                class="bg-gray-400 text-black px-4 py-2 rounded-lg clear-button flex items-center gap-2"
+            >
+                🔄 Limpiar
+            </button>
+        </div>
+        <a
+            href="/familias/register"
+            class="bg-purple-600 text-white px-4 py-2 rounded-lg"
+            >Agregar Nueva Familia</a
+        >
+    </div>
+
+    <table class="min-w-full bg-gray-800 rounded-lg shadow-md">
+        <thead class="bg-gray-900 text-white">
+            <tr>
+                <th class="text-center">Nro</th>
+                <th class="text-center">
+                    Nombre
+                    <button
+                        class="sort-button ml-2"
+                        data-sort-order="0"
+                        data-sort-field="nombre"
+                    >
+                        🔃
+                    </button>
+                </th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if list %} {% for item in list %}
+            <tr class="text-center" id="row-{{ item.idFamilia }}">
+                <td>{{ loop.index }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>
+                    <a
+                        href="/familias/edit/{{ item.idFamilia }}"
+                        class="bg-blue-600 text-white px-2 py-1 rounded-lg"
+                        >Modificar</a
+                    >
+                    <button
+                        class="bg-red-600 text-white px-2 py-1 rounded-lg"
+                        onclick="deleteRow({{ item.idFamilia }})"
+                    >
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+                <td colspan="3" class="text-center">
+                    No hay familias registradas.
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.querySelectorAll(".sort-button").forEach((button) => {
+        button.addEventListener("click", function () {
+            const sortField = this.dataset.sortField;
+            let sortOrder = this.dataset.sortOrder;
+            this.dataset.sortOrder = sortOrder;
+
+            sortOrder = sortOrder === "0" ? "1" : "0";
+            this.dataset.sortOrder = sortOrder;
+
+            console.log(
+                "Atributo :",
+                sortField,
+                "Orden:",
+                sortOrder,
+                "Método :",
+                document.getElementById("sorting-method").value
+            );
+
+            fetch("/familia/ordenar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    atributo: sortField,
+                    orden: sortOrder,
+                    metodo: document.getElementById("sorting-method").value,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => updateTable(data))
+                .catch(console.error);
+        });
+    });
+
+    document
+        .querySelector(".search-button")
+        .addEventListener("click", function () {
+            const searchField = document.getElementById("search-field").value;
+            const searchAttr = document.getElementById("search-attr").value;
+
+            console.log(
+                "Campo de búsqueda:",
+                searchField,
+                "Atributo de búsqueda:",
+                searchAttr
+            );
+
+            fetch("/familia/buscar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    searchField: searchField,
+                    searchAttr: searchAttr,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => updateTable(data))
+                .catch(console.error);
+        });
+
+    document
+        .querySelector(".clear-button")
+        .addEventListener("click", function () {
+            document.getElementById("search-field").value = "";
+            document.getElementById("search-attr").value = "nombre";
+            fetch("/familia/limpiar", { method: "GET" })
+                .then((response) => response.json())
+                .then((data) => updateTable(data))
+                .catch(console.error);
+        });
+
+    function updateTable(data) {
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = data
+            .map(
+                (item) => `
+            <tr class="text-center"> 
+                <td>${item.idFamilia}</td>
+                <td>${item.nombre}</td>
+                <td>
+                    <a href="/generadores/edit/${item.idFamilia}" class="bg-blue-600 text-white px-2 py-1 rounded-lg">Modificar</a>
+                    <button class="bg-red-600 text-white px-2 py-1 rounded-lg" onclick="eliminarGenerador(${item.idFamilia})">Eliminar</button>
+                </td>
+            </tr>
+        `
+            )
+            .join("");
+    }
+</script>
+
+{% endblock %}
